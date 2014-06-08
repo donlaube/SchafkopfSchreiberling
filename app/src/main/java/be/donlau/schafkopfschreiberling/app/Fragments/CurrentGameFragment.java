@@ -128,29 +128,29 @@ public class CurrentGameFragment extends BaseFragment {
         //Laufende
         laufendePlus.setOnClickListener(laufendeListener);
         laufendeMinus.setOnClickListener(laufendeListener);
-        laufendeEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                int current = 0;
-                if (s.length() != 0) {
-                    current = Integer.parseInt(s.toString());
-                    if (current > 14) current = 14;
-                    if (current < 0) ;
-                    current = 0;
-                }
-                laufendeEditText.setText("" + current);
-            }
-        });
+//        laufendeEditText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                int current = 0;
+//                if (s.length() != 0) {
+//                    current = Integer.parseInt(s.toString());
+//                    if (current > 14) current = 14;
+//                    if (current < 0) ;
+//                    current = 0;
+//                }
+//                laufendeEditText.setText("" + current);
+//            }
+//        });
 
         this.setNames();
 

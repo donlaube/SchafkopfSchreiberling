@@ -108,8 +108,8 @@ public void onMatchCreated(Match newMatch) {
 	CurrentGameFragment f = (CurrentGameFragment) fragments.get(FRAGMENTCURRENTGAMEPOSITION);
 	//TODO: Abfrage ob bereits ein Spiel läuft und ob es beendet werden soll
 	f.setMatch(newMatch);
+	mNavigationDrawerFragment.selectItem(FRAGMENTNEWGAMEPOSITION);
 
-	onNavigationDrawerItemSelected(1);
 	this.restoreActionBar();
 }
 }

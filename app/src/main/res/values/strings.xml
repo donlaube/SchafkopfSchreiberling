@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SchafkopfSchreiberling</string>
+    <string name="app_name">Schafkopf Schreiberling</string>
     <string name="title_section2_current_game">Aktuelles Spiel</string>
     <string name="title_section1_new_game">Neues Spiel</string>
     <string name="title_section3_stats">Statistik</string>
