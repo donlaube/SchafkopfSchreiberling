@@ -1,36 +1,45 @@
-package be.donlau.schafkopfschreiberling.app;
-
-import android.app.Activity;
+package be.donlau.schafkopfschreiberling.app.main;
 
 import android.app.ActionBar;
-import android.app.Fragment;
+import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import java.util.HashMap;
+
+import be.donlau.schafkopfschreiberling.app.Fragments.BaseFragment;
+import be.donlau.schafkopfschreiberling.app.Fragments.CurrentGameFragment;
+import be.donlau.schafkopfschreiberling.app.Fragments.NewGameFragment;
+import be.donlau.schafkopfschreiberling.app.Fragments.StatsFragment;
+import be.donlau.schafkopfschreiberling.app.R;
+import be.donlau.schafkopfschreiberling.app.bin.Match;
 
 
 public class MainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, NewGameFragment.onMatchCreatedListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    public static final int FRAGMENTNEWGAMEPOSITION = 0;
+    public static final int FRAGMENTCURRENTGAMEPOSITION = 1;
+    public static final int FRAGMENTSTATSPOSITION = 2;
+
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    public static HashMap<Integer, BaseFragment> fragments = new HashMap<Integer, BaseFragment>() {{
+        put(FRAGMENTNEWGAMEPOSITION, NewGameFragment.newInstance(R.string.title_section1_new_game, FRAGMENTNEWGAMEPOSITION));
+        put(FRAGMENTCURRENTGAMEPOSITION, CurrentGameFragment.newInstance(R.string.title_section2_current_game, FRAGMENTCURRENTGAMEPOSITION));
+        put(FRAGMENTSTATSPOSITION, StatsFragment.newInstance(R.string.title_section3_stats, FRAGMENTSTATSPOSITION));
+
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +56,18 @@ public class MainActivity extends Activity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragments.get(position))
                 .commit();
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
+    public void onSectionAttached(String name) {
+        mTitle = name;
     }
 
     public void restoreActionBar() {
@@ -76,7 +76,6 @@ public class MainActivity extends Activity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,46 +102,14 @@ public class MainActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
+@Override
+public void onMatchCreated(Match newMatch) {
+	CurrentGameFragment f = (CurrentGameFragment) fragments.get(FRAGMENTCURRENTGAMEPOSITION);
+	//TODO: Abfrage ob bereits ein Spiel läuft und ob es beendet werden soll
+	f.setMatch(newMatch);
 
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-    }
-
+	onNavigationDrawerItemSelected(1);
+	this.restoreActionBar();
+}
 }

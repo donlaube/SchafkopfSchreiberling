@@ -2,12 +2,33 @@
 <resources>
 
     <string name="app_name">SchafkopfSchreiberling</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section2_current_game">Aktuelles Spiel</string>
+    <string name="title_section1_new_game">Neues Spiel</string>
+    <string name="title_section3_stats">Statistik</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="player">Spieler</string>
+    <string name="doubleCounter">Doppler</string>
+    <string name="result">Ergebnis</string>
+    <string name="points">Stand</string>
+    <string name="sauspiel">Sauspiel</string>
+    <string name="solo">Solo</string>
+    <string name="wenz">Wenz</string>
+    <string name="geier">Geier</string>
+    <string name="gerade">Gerade</string>
+    <string name="eichel">Eichel</string>
+    <string name="gras">Gras</string>
+    <string name="herz">Herz</string>
+    <string name="schellen">Schellen</string>
+    <string name="frei">Frei</string>
+    <string name="schneider">Schneider</string>
+    <string name="schneiderschwarz">Schwarz</string>
+    <string name="du">Du</string>
+    <string name="sie">Sie</string>
+    <string name="write">Eintragen</string>
+    <string name="game">Spiel</string>
 
 </resources>
